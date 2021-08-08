@@ -9,7 +9,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// const youtubePlaylistsEndpoint = "https://www.googleapis.com/youtube/v3/playlists"
 const redirectURI = "http://localhost:3000/redirect"
 
 func main() {
@@ -20,6 +19,10 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.Redirect(302, "/login")
+	})
 
 	r.GET("/login", func(ctx *gin.Context) {
 		clientID := os.Getenv("GOOGLE_CLIENT_ID")
@@ -38,21 +41,14 @@ func main() {
 
 		token := functions.ExchangeCodeForToken(code, clientID, clientSecret, redirectURI)
 
+		playlists := functions.ListPlaylists(token)
+
 		ctx.JSON(200, gin.H{
-			"code":  code,
-			"token": token,
+			"code":      code,
+			"token":     token,
+			"playlists": playlists,
 		})
 	})
-
-	// req, err := http.NewRequest("GET", youtubePlaylistsEndpoint, nil)
-
-	// if err != nil {
-	// 	fmt.Println("There was an error")
-	// }
-
-	// token := "token"
-
-	// req.Header.Set("Authorization", token)
 
 	r.Run(":3000")
 }
