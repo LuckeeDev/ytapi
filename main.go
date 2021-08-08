@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"ytwl/functions"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -25,7 +26,7 @@ func main() {
 		redirectURI := "http://localhost:3000/redirect"
 		scopes := []string{"https://www.googleapis.com/auth/youtube"}
 
-		authURL := GetAuthURL(clientID, redirectURI, scopes)
+		authURL := functions.GetAuthURL(clientID, redirectURI, scopes)
 
 		ctx.Redirect(302, authURL)
 	})
@@ -35,7 +36,7 @@ func main() {
 		clientID := os.Getenv("GOOGLE_CLIENT_ID")
 		clientSecret := os.Getenv("GOOGLE_CLIENT_SECRET")
 
-		token := ExchangeCodeForToken(code, clientID, clientSecret, redirectURI)
+		token := functions.ExchangeCodeForToken(code, clientID, clientSecret, redirectURI)
 
 		ctx.JSON(200, gin.H{
 			"code":  code,

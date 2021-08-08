@@ -1,4 +1,4 @@
-package main
+package functions
 
 import (
 	"encoding/json"
@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"ytwl/types"
 )
 
 const googleTokenEndpoint = "https://oauth2.googleapis.com/token"
@@ -38,7 +39,7 @@ func ExchangeCodeForToken(code string, clientID string, clientSecret string, red
 
 	defer res.Body.Close()
 
-	var bodyJSON AccessTokenResponse
+	var bodyJSON types.AccessTokenResponse
 
 	body, err := ioutil.ReadAll(res.Body)
 

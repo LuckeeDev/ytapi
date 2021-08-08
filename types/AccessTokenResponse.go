@@ -1,4 +1,4 @@
-package main
+package types
 
 type AccessTokenResponse struct {
 	AccessToken string `json:"access_token"`
