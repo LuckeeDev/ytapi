@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
-	"ytwl/functions"
+	"ytapi/functions"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"

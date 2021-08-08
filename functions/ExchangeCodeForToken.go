@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"ytwl/types"
+	"ytapi/types"
 )
 
 const googleTokenEndpoint = "https://oauth2.googleapis.com/token"

@@ -1,4 +1,4 @@
-module ytwl
+module ytapi
 
 go 1.16
 
